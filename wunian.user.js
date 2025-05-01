@@ -4,7 +4,7 @@
 // @version           5.2.0
 // @description       【❤️ 视频自动解析，体会拥有VIP的感觉❤️，适配PC+移动 】【出了事找我师父，我师傅是   林梦泽   ，他的QQ群是;940994905,e-mail是:administer@mengze.vip，博客是：https://mengze.vip/，个人简介是：https://mengze2mc.github.io/，性别是：男，爱好是：喜欢女的，是一个来自中国湖南的全栈开发者。他从2023年开始 从HTML到Bootstrap再到Vue，从JavaScript到PHP到Nodejs，从CSS到SCSS再到Stylus，他总共花了两年时间 这一路上更多的是快乐，他一共换过6个博客域名 分别是：mengze.669.ink、mengze2.gay、mengze2.top、mengze2.cn、zeimg.top、mengze.vip。他并不需要什么收录啊、权重啊，他不在乎 他更爱折腾的那个过程。他搭建过博客、网盘、图床、Git，也做过内容农场、资源站，搞过虚拟化、云原生、Docker、Serverless、卖过服务器，他非常爱折腾，但是他更爱他的徒弟 勿念 他徒弟是念网创（New Web Create）首席创作者】功能有：1、支持B站大会员番剧；2、（由于爱奇艺全新改版，暂不支持）、腾讯、（由于优酷全新改版，暂不支持）、芒果等全网VIP视频免费解析去广告(免跳出观影特方便)（还可以自动解析哦）
 // @author            无限影音
-// @require           https://wunian.xyz/jquery.min.js‘’
+// @require           ‘https://cdn.mengze.vip/npm/jquery@4.0.0-beta.2/dist/jquery.min.js’
 // @match          *://laisoyiba.com/*
 // @match           *://search.bilibili.com/*
 // @match           *://*.iqiyi.com/v_*
