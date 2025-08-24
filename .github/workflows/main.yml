@@ -32,5 +32,4 @@ jobs:
       run: |
         # 使用 AWS CLI 同步文件到 R2
         aws s3 sync ./ s3://${{ secrets.BUCKET_NAME || 'launcher-mirror' }} \
-          --endpoint-url=${{ secrets.ENDPOINT_URL || 'https://2312de5794826c79e869a0d96dfcdb73.r2.cloudflarestorage.com' }} \
-          --delete
+          --endpoint-url=${{ secrets.ENDPOINT_URL || 'https://2312de5794826c79e869a0d96dfcdb73.r2.cloudflarestorage.com' }}
