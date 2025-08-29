@@ -1,20 +1,25 @@
-name: Delete Specific R2 Folder
+name: Delete Specific S3 Folder
 
 on:
   workflow_dispatch:
+    inputs:
+      folder_path:
+        description: '要删除的文件夹路径（必须以 / 结尾，例如 abc/）'
+        required: true
+
+env:
+  AWS_ACCESS_KEY_ID:     19f1352532d1398e1f1fde4fc8179582
+  AWS_SECRET_ACCESS_KEY: ec6a24f58ef800a48299f40be1181e23d08c0fbc88614fbe23b308d057e0da82
+  AWS_DEFAULT_REGION:    auto
+  BUCKET_NAME:           launcher-mirror
+  ENDPOINT_URL:          https://2312de5794826c79e869a0d96dfcdb73.r2.cloudflarestorage.com
 
 jobs:
   delete-folder:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: '19f1352532d1398e1f1fde4fc8179582'
-          aws-secret-access-key: 'ec6a24f58ef800a48299f40be1181e23d08c0fbc88614fbe23b308d057e0da82'
-          aws-region: 'us-east-1'
-
-      - name: Delete R2 Folder
+      - name: 删除 R2 文件夹
         run: |
-          aws s3 rm s3://launcher-mirror/aws/ --recursive --endpoint-url https://2312de5794826c79e869a0d96dfcdb73.r2.cloudflarestorage.com
+          aws s3 rm "s3://${BUCKET_NAME}/${{ github.event.inputs.folder_path }}" \
+            --recursive \
+            --endpoint-url="${ENDPOINT_URL}"
