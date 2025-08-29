@@ -13,8 +13,8 @@ jobs:
         with:
           aws-access-key-id: '19f1352532d1398e1f1fde4fc8179582'
           aws-secret-access-key: 'ec6a24f58ef800a48299f40be1181e23d08c0fbc88614fbe23b308d057e0da82'
-          aws-region: 'auto'  # 使用 'auto' 作为区域，以支持 Cloudflare R2 的自动区域解析
+          aws-region: 'us-east-1'
 
       - name: Delete R2 Folder
         run: |
-          aws s3 rm s3://launcher-mirror/aws/ --recursive
+          aws s3 rm s3://launcher-mirror/aws/ --recursive --endpoint-url https://2312de5794826c79e869a0d96dfcdb73.r2.cloudflarestorage.com
