@@ -1,35 +1,20 @@
-name: Sync to Cloudflare R2
+name: Delete Specific R2 Folder
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  sync-to-r2:
+  delete-folder:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: '19f1352532d1398e1f1fde4fc8179582'
+          aws-secret-access-key: 'ec6a24f58ef800a48299f40be1181e23d08c0fbc88614fbe23b308d057e0da82'
+          aws-region: 'auto'  # 使用 'auto' 作为区域，以支持 Cloudflare R2 的自动区域解析
 
-    - name: Configure AWS CLI for Cloudflare R2
-      run: |
-        # 安装 AWS CLI（如果尚未安装）
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install --update
-        
-        # 配置 R2 访问
-        aws configure set aws_access_key_id ${{ secrets.ACCESS_KEY || '19f1352532d1398e1f1fde4fc8179582' }}
-        aws configure set aws_secret_access_key ${{ secrets.SECRET_KEY || 'ec6a24f58ef800a48299f40be1181e23d08c0fbc88614fbe23b308d057e0da82' }}
-        aws configure set default.region auto
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY || '19f1352532d1398e1f1fde4fc8179582' }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY || 'ec6a24f58ef800a48299f40be1181e23d08c0fbc88614fbe23b308d057e0da82' }}
-
-    - name: Sync files to Cloudflare R2
-      run: |
-        # 使用 AWS CLI 同步文件到 R2
-        aws s3 sync ./ s3://${{ secrets.BUCKET_NAME || 'launcher-mirror' }} \
-          --endpoint-url=${{ secrets.ENDPOINT_URL || 'https://2312de5794826c79e869a0d96dfcdb73.r2.cloudflarestorage.com' }}
+      - name: Delete R2 Folder
+        run: |
+          aws s3 rm s3://launcher-mirror/aws/ --recursive
